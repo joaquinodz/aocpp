@@ -4,7 +4,7 @@ cmake_minimum_required (VERSION 3.12)
 # VERY useful for Windows developers
 # I put it in here because you can use vcpkg on both Linux and MacOS as well so its not necesarily platform/compiler specific
 if(DEFINED ENV{VCPKG_ROOT} AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
-    include("$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake")
+    list(APPEND CMAKE_MODULE_PATH "$ENV{VCPKG_ROOT}/scripts/buildsystems")
     message("-- Using Microsoft's vcpkg package manager!")
 endif()
 
