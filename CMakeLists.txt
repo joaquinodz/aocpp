@@ -49,10 +49,6 @@ elseif (MSVC)
 
 endif()
 
-find_package(SDL2 CONFIG REQUIRED)
-find_package(sdl2-image CONFIG REQUIRED)
-find_package(sdl2-mixer CONFIG REQUIRED)
-
 # Using CONFIGURE_DEPENDS, whenever the glob's value changes, 
 # CMake will re-run and update the build with the new/removed files.
 file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS "source/*.cpp")
@@ -60,6 +56,18 @@ file(GLOB_RECURSE HEADERS CONFIGURE_DEPENDS "source/*.h")
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 
-target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2 SDL2::SDL2main SDL2::SDL2_image)
-target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2_image)
-target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2_mixer)
+# Find SDL2, SDL2_image and SDL2_gfx libraries
+find_package(SDL2 REQUIRED)
+find_package(SDL2_image REQUIRED)
+find_package(SDL2_mixer REQUIRED)
+
+# Link SDL2::Main, SDL2::Image and SDL2::GFX to our project
+target_link_libraries(${PROJECT_NAME} SDL2::Main SDL2::Image SDL2::Mixer)
+
+#find_package(SDL2 CONFIG REQUIRED)
+#find_package(sdl2-image CONFIG REQUIRED)
+#find_package(sdl2-mixer CONFIG REQUIRED)
+
+#target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2 SDL2::SDL2main SDL2::SDL2_image)
+#target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2_image)
+#target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2_mixer)
