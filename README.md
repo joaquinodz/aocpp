@@ -4,9 +4,19 @@ MMORPG Video Game of the year 1999 created in Visual Basic 6.0 by Pablo Marquez 
 I have translated in C++ under SDL2, this game would be your base client, it would be necessary to implement the multiplayer with your server.
 
 # How to compile
-Visual Studio 2019 is needed (although with Code::blocks, DevC++ or any other IDE you can use it, if you know how to build the project).
+Clone the repository, remember to also clone the submodules.
+```
+git clone --recursive https://github.com/joaquinodz/aocpp
+```
 
-You must also install and include the SDL2 library along with SDL_Image and SDL_Mixer.
+First, you need to configure the Project.
+```
+cmake -B build -A win32
+```
+Then, you can compile it
+```
+cmake --build build
+```
 
 Steps for windows:
 http://lazyfoo.net/tutorials/SDL/01_hello_SDL/windows/index.php
