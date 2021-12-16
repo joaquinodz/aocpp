@@ -1,3 +1,10 @@
+# Directories
 build
+external
+
+# Files
 CMakeFiles
 CMakeCache.txt
+
+# Extensions
+*.bak

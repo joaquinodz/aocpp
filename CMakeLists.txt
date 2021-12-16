@@ -1,12 +1,7 @@
 cmake_minimum_required (VERSION 3.12)
 
-# Use Microsoft's package manager (vcpkg) if the `VCPKG_ROOT` environment variable is set
-# VERY useful for Windows developers
-# I put it in here because you can use vcpkg on both Linux and MacOS as well so its not necesarily platform/compiler specific
-if(DEFINED ENV{VCPKG_ROOT} AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
-    list(APPEND CMAKE_MODULE_PATH "$ENV{VCPKG_ROOT}/scripts/buildsystems")
-    message("-- Using Microsoft's vcpkg package manager!")
-endif()
+# Use Microsoft VCPKG to manage all our dependencies
+set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/external/vcpkg/scripts/buildsystems/vcpkg.cmake CACHE STRING "Vcpkg toolchain file")
 
 project (ArgentumOnline)
 
@@ -14,7 +9,7 @@ project (ArgentumOnline)
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake/Modules)
 
 # Version of C++ standard to use.
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 20)
 
 # out-of-source build directory
 set(CMAKE_BINARY_DIR ${CMAKE_BINARY_DIR}/build)
@@ -56,18 +51,10 @@ file(GLOB_RECURSE HEADERS CONFIGURE_DEPENDS "source/*.h")
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 
-# Find SDL2, SDL2_image and SDL2_gfx libraries
-find_package(SDL2 REQUIRED)
-find_package(SDL2_image REQUIRED)
-find_package(SDL2_mixer REQUIRED)
+find_package(SDL2 CONFIG REQUIRED)
+find_package(sdl2-image CONFIG REQUIRED)
+find_package(sdl2-mixer CONFIG REQUIRED)
 
-# Link SDL2::Main, SDL2::Image and SDL2::GFX to our project
-target_link_libraries(${PROJECT_NAME} SDL2::Main SDL2::Image SDL2::Mixer)
-
-#find_package(SDL2 CONFIG REQUIRED)
-#find_package(sdl2-image CONFIG REQUIRED)
-#find_package(sdl2-mixer CONFIG REQUIRED)
-
-#target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2 SDL2::SDL2main SDL2::SDL2_image)
-#target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2_image)
-#target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2_mixer)
+target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2 SDL2::SDL2main)
+target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2_image)
+target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2_mixer)
