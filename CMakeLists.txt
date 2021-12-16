@@ -23,7 +23,7 @@ if (CMAKE_CXX_COMPILER_ID MATCHES "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang"
         string(APPEND CMAKE_CXX_FLAGS " -Wno-unused-local-typedefs")
         string(APPEND CMAKE_EXE_LINKER_FLAGS " -ggdb -fstack-protector")
         
-        # Flag -rdynamic does not exist in MSYS2
+        # Flag -rdynamic does not exist in MSYS2 nor in MINGW
         if(NOT MSYS AND NOT MINGW)
             string(APPEND CMAKE_CXX_FLAGS " -rdynamic")
             string(APPEND CMAKE_EXE_LINKER_FLAGS " -rdynamic")
@@ -46,10 +46,9 @@ endif()
 
 # Using CONFIGURE_DEPENDS, whenever the glob's value changes, 
 # CMake will re-run and update the build with the new/removed files.
-file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS "source/*.cpp")
-file(GLOB_RECURSE HEADERS CONFIGURE_DEPENDS "source/*.h")
+file(GLOB_RECURSE SOURCE CONFIGURE_DEPENDS "source/*.cpp")
 
-add_executable(${PROJECT_NAME} ${SOURCES})
+add_executable(${PROJECT_NAME} ${SOURCE})
 
 find_package(SDL2 CONFIG REQUIRED)
 find_package(sdl2-image CONFIG REQUIRED)
