@@ -11,9 +11,27 @@
             "program": "ArgentumOnline.exe",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "${fileDirname}/../build/Debug",
+            "cwd": "${fileWorkspaceFolder}/build/Debug",
             "environment": [],
             "console": "externalTerminal"
-        }
+        },
+        {
+            "name": "(Unix) Iniciar",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileWorkspaceFolder}/build/Debug/ArgentumOnline",
+            "cwd": "${fileWorkspaceFolder}/build/Debug",
+            "stopAtEntry": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+          }
+          
     ]
 }
