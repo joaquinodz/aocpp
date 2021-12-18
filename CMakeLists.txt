@@ -6,7 +6,7 @@ set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/external/vcpkg/scripts/buil
 project (ArgentumOnline)
 
 # Allow third-party CMake scripts to find modules.
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake/Modules)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
 
 # Version of C++ standard to use.
 set(CMAKE_CXX_STANDARD 20)
@@ -61,3 +61,9 @@ target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2_mixer)
 if (UNIX)
 	target_link_libraries(${PROJECT_NAME} PRIVATE X11 Xext)
 endif()
+
+add_custom_target(
+    ArgentumOnline_Assets ALL
+    COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/Resources ${CMAKE_CURRENT_BINARY_DIR}/Resources
+    DEPENDS ${PROJECT_NAME}
+)
