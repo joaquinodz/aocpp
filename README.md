@@ -9,14 +9,14 @@ Clone the repository, remember to also clone the submodules.
 git clone --recursive https://github.com/joaquinodz/aocpp
 ```
 
-First, you need to configure the Project.
-```
-cmake -B build -A win32
-```
-Then, you can compile it
-```
-cmake --build build
-```
+First, you need to **configure** the Project.
+
+- On Windows: `cmake --preset windows-debug-x64`
+- On Linux: `cmake --preset linux-debug-x64`
+
+Then, you can **compile** it
+- On Windows: `cmake --build --preset windows-debug-x64`
+- On Linux: `cmake -build --preset linux-debug-x64`
 
 Steps for windows:
 http://lazyfoo.net/tutorials/SDL/01_hello_SDL/windows/index.php

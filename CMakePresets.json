@@ -1,0 +1,83 @@
+{
+    "version": 3,
+    "cmakeMinimumRequired": {
+      "major": 3,
+      "minor": 20,
+      "patch": 0
+    },
+    "configurePresets": [
+      {
+        "name": "base-global",
+        "description": "Parent configurations for all builds.",
+        "toolchainFile": "${sourceDir}/external/vcpkg/scripts/buildsystems/vcpkg.cmake",
+        "hidden": true,
+        "cacheVariables": {
+          "CMAKE_CXX_STANDARD": "20"
+        }
+      },
+      {
+        "name": "base-debug",
+        "description": "Sets up the base configuration for debug builds. For DEBUG configurations.",
+        "hidden": true,
+        "inherits": "base-global",
+        "binaryDir": "${sourceDir}/build/Debug",
+        "cacheVariables": {
+          "CMAKE_BUILD_TYPE": "Debug"
+        }
+      },
+      {
+        "name": "windows-debug",
+        "hidden": true,
+        "inherits": "base-debug",
+        "description": "Sets up the base configuration for all Windows debug builds.",
+        "condition": {
+          "type": "equals",
+          "lhs": "${hostSystemName}",
+          "rhs": "Windows"
+        }
+      },
+      {
+        "name": "linux-debug",
+        "hidden": true,
+        "description": "Sets up the base configuration for all Unix-based OS's debug builds.",
+        "generator": "Unix Makefiles",
+        "inherits": "base-debug",
+        "cacheVariables": {
+          "CMAKE_CXX_FLAGS": "-Wall -Wextra -Wconversion -pedantic -ggdb -fstack-protector -D_GLIBCXX_DEBUG -Wno-unused-local-typedefs",
+          "CMAKE_CXX_FLAGS_DEBUG": "-g",
+          "CMAKE_EXE_LINKER_FLAGS": "-ggdb -fstack-protector -rdynamic"
+        }
+      },
+      {
+        "name": "windows-debug-x64",
+        "hidden": false,
+        "inherits": "windows-debug",
+        "generator": "Visual Studio 17 2022",
+        "displayName": "Windows configuration for x64 bits architecture",
+        "architecture": {
+            "value": "x64"
+        }
+      },
+      {
+        "name": "linux-debug-x64",
+        "inherits": "linux-debug",
+        "hidden": false,
+        "displayName": "Linux configuration for x64 bits architecture",
+        "toolset": {
+            "value": ""
+        }
+      }
+    ],
+    "buildPresets": [
+      {
+        "name": "windows-debug-x64",
+        "displayName": "Windows build for x64 bits architecture",
+        "configurePreset": "windows-debug-x64"
+      },
+      {
+        "name": "linux-debug-x64",
+        "displayName": "Linux build for x64 bits architecture",
+        "configurePreset": "linux-debug-x64"
+      }
+    ]
+}
