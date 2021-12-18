@@ -57,3 +57,7 @@ find_package(sdl2-mixer CONFIG REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2 SDL2::SDL2main)
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2_image)
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2_mixer)
+
+if (UNIX)
+	target_link_libraries(${PROJECT_NAME} PRIVATE X11 Xext)
+endif()
