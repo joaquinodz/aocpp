@@ -74,8 +74,11 @@ void Game::render()
 
 void Game::clean()
 {
+    m_isRunning = false;
+
     if(m_Window != nullptr) SDL_DestroyWindow(m_Window);
     if(renderer != nullptr) SDL_DestroyRenderer(renderer);
+    
     SDL_Quit();
 
     std::cout << "Thank you for playing! See you later, i hope ;)" << std::endl;
