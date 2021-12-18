@@ -1,12 +1,8 @@
 #include "resources.h"
 
-Resources::Resources() {
+Resources::Resources() = default;
 
-}
-
-Resources::~Resources() {
-
-}
+Resources::~Resources() = default;
 
 bool Resources::loadResources() {
     if (!loadCFG()) return false;
@@ -26,7 +22,7 @@ bool Resources::loadResources() {
 bool Resources::loadFonts() {
     SDL_RWops* file = SDL_RWFromFile("Resources/fonts.bin", "r+b");
 
-    if (file == NULL){
+    if (file == nullptr){
         printf("Cannot to open the file 'fonts.bin' \n");
         return false;
     }
@@ -45,7 +41,7 @@ bool Resources::loadBodys() {
 
     SDL_RWops* file = SDL_RWFromFile("Resources/bodys.ind", "r+b");
 
-    if (file == NULL) {
+    if (file == nullptr) {
         printf("Cannot to open the file 'bodys.ind' \n");
         return false;
     }
@@ -81,7 +77,7 @@ bool Resources::loadHeads() {
 
     SDL_RWops* file = SDL_RWFromFile("Resources/heads.ind", "r+b");
 
-    if (file == NULL) {
+    if (file == nullptr) {
         printf("Cannot to open the file 'heads.ind' \n");
         return false;
     }
@@ -114,7 +110,7 @@ bool Resources::loadHelmets() {
 
     SDL_RWops* file = SDL_RWFromFile("Resources/helmets.ind", "r+b");
 
-    if (file == NULL) {
+    if (file == nullptr) {
         printf("Cannot to open the file 'helmets.ind' \n");
         return false;
     }
@@ -147,7 +143,7 @@ bool Resources::loadShields() {
 
     SDL_RWops* file = SDL_RWFromFile("Resources/shields.ind", "r+b");
 
-    if (file == NULL) {
+    if (file == nullptr) {
         printf("Cannot to open the file 'shields.ind' \n");
         return false;
     }
@@ -179,7 +175,7 @@ bool Resources::loadWeapons() {
 
     SDL_RWops* file = SDL_RWFromFile("Resources/weapons.ind", "r+b");
 
-    if (file == NULL) {
+    if (file == nullptr) {
         printf("Cannot to open the file 'weapons.ind' \n");
         return false;
     }
@@ -209,7 +205,7 @@ bool Resources::loadWeapons() {
 bool Resources::loadCFG() {
     SDL_RWops* file = SDL_RWFromFile("Resources/cfg.bin", "r+b");
 
-    if (file == NULL) {
+    if (file == nullptr) {
         printf("Cannot to open the file 'cfg.bin' \n");
         return false;
     }
@@ -229,7 +225,7 @@ bool Resources::loadCFG() {
 void Resources::saveCFG() {
     SDL_RWops* file = SDL_RWFromFile("Resources/cfg.bin", "w+b");
 
-    if (file == NULL) {
+    if (file == nullptr) {
         printf("Cannot to open the file 'cfg.bin'. \n");
         return;
     }
@@ -250,7 +246,7 @@ bool Resources::loadMap(int numMap) {
 
     SDL_RWops* file = SDL_RWFromFile(path.str().c_str(), "r+b");
     
-    if (file == NULL) {
+    if (file == nullptr) {
         printf("Error al cargar el mapa %i", numMap);
         return false;
     }
@@ -315,7 +311,7 @@ bool Resources::loadMap(int numMap) {
 bool Resources::loadGrhData() {
     SDL_RWops* file = SDL_RWFromFile("Resources/graphics.ind", "r+b");
 
-    if (file == NULL) {
+    if (file == nullptr) {
         printf("Cannot to open the file 'graphics.bin' \n");
         return false;
     }
@@ -423,7 +419,7 @@ bool Resources::loadGrhData() {
 bool Resources::loadFXs() {
     SDL_RWops* file = SDL_RWFromFile("Resources/fxs.ind", "r+b");
 
-    if (file == NULL) {
+    if (file == nullptr) {
         printf("Cannot to open the file 'fxs.bin' \n");
         return false;
     }

@@ -1,18 +1,18 @@
-#include "engine.h"
+#include "Game.h"
 
-int main(int argc, char* args[]){
-	Engine* engine = new Engine();
+Game *game = nullptr;
 
-	if (engine->init()) {
-		while (engine->getPrgRun()) {
-			engine->showNextFrame();
-			engine->checkInput();
-			engine->checkKeys();
-		}
-	}
+int main(int argc, char *argv[])
+{
+    game = new Game();
 
-	engine->close();
-	delete engine;
+    while (game->running()) {
+        game->handleEvents();
+        game->update();
+        game->render();
+    }
 
-	return 0;
+    game->clean();
+
+    return 0;
 }

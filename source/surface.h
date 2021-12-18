@@ -11,7 +11,7 @@ struct nodoTextures {
 class Surface {
 	private:
 		nodoTextures* listTLoaded = NULL; // Lista
-		nodoTextures* Textura = new nodoTextures();; // toma un nodo de la lista y lo renderiza.
+		nodoTextures* Textura = new nodoTextures(); // toma un nodo de la lista y lo renderiza.
 
 	public:
 		Surface();
