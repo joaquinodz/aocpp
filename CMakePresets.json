@@ -10,6 +10,7 @@
         "name": "base-global",
         "description": "Parent configurations for all builds.",
         "toolchainFile": "${sourceDir}/external/vcpkg/scripts/buildsystems/vcpkg.cmake",
+        "binaryDir": "${sourceDir}/build",
         "hidden": true,
         "cacheVariables": {
           "CMAKE_CXX_STANDARD": "20"
@@ -20,7 +21,6 @@
         "description": "Sets up the base configuration for debug builds. For DEBUG configurations.",
         "hidden": true,
         "inherits": "base-global",
-        "binaryDir": "${sourceDir}/build/Debug",
         "cacheVariables": {
           "CMAKE_BUILD_TYPE": "Debug"
         }
@@ -29,6 +29,7 @@
         "name": "windows-debug",
         "hidden": true,
         "inherits": "base-debug",
+        "generator": "Visual Studio 17 2022",
         "description": "Sets up the base configuration for all Windows debug builds.",
         "condition": {
           "type": "equals",
@@ -46,13 +47,17 @@
           "CMAKE_CXX_FLAGS": "-Wall -Wextra -Wconversion -pedantic -ggdb -fstack-protector -D_GLIBCXX_DEBUG -Wno-unused-local-typedefs",
           "CMAKE_CXX_FLAGS_DEBUG": "-g",
           "CMAKE_EXE_LINKER_FLAGS": "-ggdb -fstack-protector -rdynamic"
+        },
+        "condition": {
+          "type": "equals",
+          "lhs": "${hostSystemName}",
+          "rhs": "Linux"
         }
       },
       {
         "name": "windows-debug-x64",
         "hidden": false,
         "inherits": "windows-debug",
-        "generator": "Visual Studio 17 2022",
         "displayName": "Windows configuration for x64 bits architecture",
         "architecture": {
             "value": "x64"
