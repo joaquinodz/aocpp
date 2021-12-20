@@ -13,7 +13,7 @@
         "binaryDir": "${sourceDir}/build",
         "hidden": true,
         "cacheVariables": {
-          "CMAKE_CXX_STANDARD": "20"
+          "CMAKE_CXX_STANDARD": "23"
         }
       },
       {
@@ -54,6 +54,15 @@
           "rhs": "Linux"
         }
       },
+	  {
+        "name": "windows-debug-x86",
+        "hidden": false,
+        "inherits": "windows-debug",
+        "displayName": "Windows configuration for x86 bits architecture",
+        "architecture": {
+            "value": "Win32"
+        }
+      },
       {
         "name": "windows-debug-x64",
         "hidden": false,
@@ -74,6 +83,11 @@
       }
     ],
     "buildPresets": [
+	  {
+        "name": "windows-debug-x86",
+        "displayName": "Windows build for x86 bits architecture",
+        "configurePreset": "windows-debug-x86"
+      },
       {
         "name": "windows-debug-x64",
         "displayName": "Windows build for x64 bits architecture",
